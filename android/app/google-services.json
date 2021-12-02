@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "459069759067",
+    "project_id": "kai-app-491f6",
+    "storage_bucket": "kai-app-491f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459069759067:android:2b2d8546812e79d2c5697e",
+        "android_client_info": {
+          "package_name": "com.example.app_eat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459069759067-l73v9sm7egt1fngl58dkliv51bboiurk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIE_ydmN849AZgbYr-rRqv6p_RNj6KILk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459069759067-l73v9sm7egt1fngl58dkliv51bboiurk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
