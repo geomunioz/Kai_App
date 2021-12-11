@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 import 'package:app_eat/pages/homePages.dart';
 import 'package:app_eat/pages/login.dart';
-import 'package:app_eat/pages/registerAccount_2.dart';
+import 'package:app_eat/pages/register_account_2.dart';
 import 'package:app_eat/pages/editProfile.dart';
 import 'package:app_eat/pages/productDetails.dart';
 

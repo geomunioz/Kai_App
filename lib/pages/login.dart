@@ -35,7 +35,6 @@ class _LoginState extends State<Login> {
     lastName: "",
     email: "",
     urlImage: "",
-    shoppingCar: [],
   );
 
   String? _userId;

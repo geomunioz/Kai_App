@@ -1,5 +1,6 @@
 import 'package:app_eat/utils/routes.dart';
 import 'package:app_eat/utils/strings.dart';
+import 'package:app_eat/utils/styles.dart';
 
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ import 'package:app_eat/data/domain/user.dart';
 
 import 'package:app_eat/widgets/showAlertDialog.dart';
 import 'package:app_eat/widgets/colors.dart';
+import 'package:flutter/services.dart';
 
 import 'package:injector/injector.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,8 +27,8 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
   final _addUserUseCase = Injector.appInstance.get<AddUserUseCase>();
   final _uploadFileUseCase = Injector.appInstance.get<UploadFileUseCase>();
 
-  TextEditingController _nameController = new TextEditingController();
-  TextEditingController _lastnameController = new TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _lastnameController = TextEditingController();
 
   late User newUser;
 
@@ -48,45 +50,37 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
     return Scaffold(
       backgroundColor: black,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: padding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 80.0),
+            const Padding(
+              padding: EdgeInsets.only(top: 80.0),
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: 200,
                   height: 60,
                   child: Text(
                     'Crear Cuenta',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: text24WhiteBold,
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25.0,
               child: Text(
                 'Nombre',
-                style: TextStyle(
-                  color: green50,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: text16Green50,
               ),
             ),
             TextField(
-              style: TextStyle(
+              style:const  TextStyle(
                 color: green25,
               ),
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: black50,
                 focusedBorder: OutlineInputBorder(
@@ -99,26 +93,20 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
               ),
               controller: _nameController,
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
+            sizedBox20,
+            const SizedBox(
               height: 25.0,
               child: Text(
                 'Apellidos',
-                style: TextStyle(
-                  color: green50,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: text16Green50,
               ),
             ),
             TextField(
-              style: TextStyle(
+              style: const TextStyle(
                 color: green25,
               ),
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: black50,
                 focusedBorder: OutlineInputBorder(
@@ -131,18 +119,12 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
               ),
               controller: _lastnameController,
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
+            sizedBox20,
+            const SizedBox(
               height: 25.0,
               child: Text(
                 'Imagen de Perfil',
-                style: TextStyle(
-                  color: green50,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: text16Green50,
               ),
             ),
             ElevatedButton(
@@ -152,17 +134,19 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
               style: ElevatedButton.styleFrom(
                 primary: green50,
               ),
-              child: Text(
+              child: const Text(
                 'Agregar Imagen',
-                style: TextStyle(
-                  color: black,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: text14Black,
               ),
             ),
-            image == null ? Center() : Image.file(image!),
-            SizedBox(
+            //image == null ? const Center() : Image.file(image!),
+            image != null ? Image.file(
+                image!,
+              width: 300,
+              height: 300,
+              fit: BoxFit.cover,
+            ) : const Center(),
+            const SizedBox(
               height: 150.0,
             ),
             SizedBox(
@@ -170,7 +154,7 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
               child: MaterialButton(
                 height: 50.0,
                 color: green50,
-                child: Text('Crear Cuenta'),
+                child: const Text('Crear Cuenta'),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
@@ -259,22 +243,20 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            contentPadding: EdgeInsets.all(0),
+            contentPadding: const EdgeInsets.all(0),
             content: SingleChildScrollView(
               child: Column(
                 children: [
                   InkWell(
-                    onTap: () {
-                      selImage(1);
-                    },
+                    onTap: () => pickImage(ImageSource.camera),
                     child: Container(
-                      padding: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: const BoxDecoration(
                           border: Border(
                               bottom: BorderSide(width: 1, color: gray))
                       ),
                       child: Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Tomar foto',
@@ -288,17 +270,15 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      selImage(2);
-                    },
+                    onTap: () => pickImage(ImageSource.gallery),
                     child: Container(
-                      padding: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: const BoxDecoration(
                           border: Border(
                               bottom: BorderSide(width: 1, color: gray))
                       ),
                       child: Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Elergir Foto',
@@ -316,12 +296,12 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
                       Navigator.of(context).pop();
                     },
                     child: Container(
-                      padding: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: const BoxDecoration(
                         color: green50,
                       ),
                       child: Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Cancelar',
@@ -333,7 +313,6 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
                             ),
 
                           ),
-                          Icon(Icons.camera_alt, color: green25,),
                         ],
                       ),
                     ),
@@ -363,6 +342,20 @@ class _RegisterAccount_2State extends State<RegisterAccount_2> {
       }
     });
 
-    Navigator.of(this.context).pop();
+    Navigator.of(context).pop();
+  }
+
+  Future pickImage(ImageSource source) async{
+    try{
+      final image = await ImagePicker().pickImage(source: source);
+      if(image == null) return;
+
+      final imageTermporary = File(image.path);
+      setState(() {
+        this.image = imageTermporary;
+      });
+    }on PlatformException catch(e){
+      print('Filed to pick Image $e');
+    }
   }
 }

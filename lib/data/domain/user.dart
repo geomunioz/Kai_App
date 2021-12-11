@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:app_eat/data/domain/product.dart';
 
 class User{
   String id;
@@ -8,7 +6,6 @@ class User{
   String lastName;
   String email;
   String urlImage;
-  List<Product> shoppingCar;
 
   User({
     this.id = "",
@@ -16,7 +13,6 @@ class User{
     this.lastName = "",
     this.email = "",
     this.urlImage = "",
-    required this.shoppingCar,
   });
 
   User copyWith({
@@ -25,7 +21,6 @@ class User{
     String? lastName,
     String? email,
     String? urlImage,
-    List<Product>? shoppingCar,
   }) {
     return User(
       id: id ?? this.id,
@@ -33,7 +28,6 @@ class User{
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
       urlImage: urlImage ?? this.urlImage,
-      shoppingCar: shoppingCar ?? this.shoppingCar,
     );
   }
 
@@ -44,7 +38,6 @@ class User{
       'lastName': lastName,
       'email': email,
       'urlImage': urlImage,
-      'shoppingCar': shoppingCar,
     };
   }
 
@@ -55,7 +48,6 @@ class User{
       lastName: map['lastName'] ?? "",
       email: map['email'] ?? "",
       urlImage: map['urlImage'] ?? "",
-      shoppingCar: map['shoppingCar'] != null ? List<Product>.from(map['shoppingCar']) : [],
     );
   }
 
@@ -65,7 +57,7 @@ class User{
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, email: $email, urlImage: $urlImage, shoppingCar: $shoppingCar)';
+    return 'User(id: $id, firstName: $firstName, lastName: $lastName, email: $email, urlImage: $urlImage)';
   }
 
   @override
@@ -77,8 +69,7 @@ class User{
         other.firstName == firstName &&
         other.lastName == lastName &&
         other.email == email &&
-        other.urlImage == urlImage &&
-        listEquals(other.shoppingCar, shoppingCar);
+        other.urlImage == urlImage;
   }
 
   @override
@@ -87,7 +78,6 @@ class User{
     firstName.hashCode ^
     lastName.hashCode ^
     email.hashCode ^
-    urlImage.hashCode ^
-    shoppingCar.hashCode;
+    urlImage.hashCode;
   }
 }

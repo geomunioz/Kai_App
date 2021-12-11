@@ -1,7 +1,8 @@
+import 'package:app_eat/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:app_eat/widgets/colors.dart';
 import 'package:app_eat/pages/login.dart';
-import 'package:app_eat/pages/registerAccount.dart';
+import 'package:app_eat/pages/register_account.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,38 +12,34 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: black,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: padding,
         child: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 100.0,
             ),
-            Image(
+            const Image(
                 image: AssetImage('assets/images/Order.png'),
                 fit: BoxFit.cover,
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
-            Text(
+            const Text(
                 'Bienvenido',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24.0,
-                fontWeight: FontWeight.w600,
+              style: text24White,
+            ),
+            Container(
+              width: 300.0,
+              height: 50.0,
+              alignment: Alignment.center,
+              child: const Text(
+                'Productos a tu alcance más cerca de ti. Registrate o Inicia Sesión para disfrutar.',
+                style: text14White,
+                textAlign: TextAlign.center,
               ),
             ),
-            Text(
-              'Productos a tu alcance más cerca de ti. Registrate o Inicia Sesión para disfrutar.',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.normal,
-
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
+            const SizedBox(
               height: 150.0,
             ),
             SizedBox(
@@ -50,7 +47,7 @@ class Home extends StatelessWidget {
               child: MaterialButton(
                 height: 50.0,
                   color: green50,
-                  child: Text('Crear cuenta'),
+                  child: const Text('Crear cuenta'),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -59,7 +56,7 @@ class Home extends StatelessWidget {
                     fullscreenDialog: true,),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
             SizedBox(
@@ -67,7 +64,7 @@ class Home extends StatelessWidget {
               child: MaterialButton(
                   height: 50.0,
                   color: green25,
-                  child: Text(
+                  child: const Text(
                       'Iniciar Sesión',
                     style: TextStyle(
                       color: green100,
@@ -92,7 +89,7 @@ class Home extends StatelessWidget {
         context,
         MaterialPageRoute(
           fullscreenDialog: fullscreenDialog,
-          builder: (context) => Login(),
+          builder: (context) => const Login(),
         )
     );
   }
@@ -102,7 +99,7 @@ class Home extends StatelessWidget {
         context,
         MaterialPageRoute(
           fullscreenDialog: fullscreenDialog,
-          builder: (context) => RegisterAccount(),
+          builder: (context) => const RegisterAccount(),
         )
     );
   }

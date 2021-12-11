@@ -1,6 +1,6 @@
+import 'package:app_eat/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import 'package:app_eat/data/usecases/GetUserUseCase.dart';
 import 'package:app_eat/data/usecases/SignUpWithEmailUseCase.dart';
 import 'package:app_eat/data/usecases/SignInWithEmailUseCase.dart';
 
@@ -26,11 +26,10 @@ class RegisterAccount extends StatefulWidget {
 class _RegisterAccountState extends State<RegisterAccount> {
   final _signInWithEmailUseCase = Injector.appInstance.get<SignInWithEmailUseCase>();
   final _signUpWithEmailUseCase = Injector.appInstance.get<SignUpWithEmailUseCase>();
-  final _getUserUseCase = Injector.appInstance.get<GetUserUseCase>();
 
-  TextEditingController _emailController = new TextEditingController();
-  TextEditingController _passwordController = new TextEditingController();
-  TextEditingController _passwordConfirmController = new TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmController = TextEditingController();
 
   User newUser = User(
     id: "",
@@ -38,7 +37,6 @@ class _RegisterAccountState extends State<RegisterAccount> {
     lastName: "",
     email: "",
     urlImage: "",
-    shoppingCar: [],
   );
 
   @override
@@ -51,7 +49,7 @@ class _RegisterAccountState extends State<RegisterAccount> {
     return Scaffold(
       backgroundColor: black,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: padding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -61,38 +59,27 @@ class _RegisterAccountState extends State<RegisterAccount> {
                 child: Container(
                   width: 200,
                   height: 60,
-                  child: Text(
+                  child: const Text(
                     'Crear Cuenta',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: text24WhiteBold,
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
+           sizedBox20,
+            const SizedBox(
               height: 25.0,
               child: Text(
                 'Correo Electronico',
-                style: TextStyle(
-                  color: green50,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: text16Green50,
               ),
             ),
             TextField(
-              style: TextStyle(
+              style: const TextStyle(
                 color: green25,
               ),
-
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: black50,
                 focusedBorder: OutlineInputBorder(
@@ -105,26 +92,20 @@ class _RegisterAccountState extends State<RegisterAccount> {
               ),
               controller: _emailController,
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
+            sizedBox20,
+            const SizedBox(
               height: 25.0,
               child: Text(
                 'Contraseña',
-                style: TextStyle(
-                  color: green50,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: text16Green50,
               ),
             ),
             TextField(
-              style: TextStyle(
+              style: const TextStyle(
                 color: green25,
               ),
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: black50,
                 focusedBorder: OutlineInputBorder(
@@ -137,26 +118,20 @@ class _RegisterAccountState extends State<RegisterAccount> {
               ),
               controller: _passwordController,
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
+            sizedBox20,
+            const SizedBox(
               height: 25.0,
               child: Text(
                 'Confirmar Contraseña',
-                style: TextStyle(
-                  color: green50,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: text16Green50,
               ),
             ),
             TextField(
-              style: TextStyle(
+              style: const TextStyle(
                 color: green25,
               ),
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: black50,
                 focusedBorder: OutlineInputBorder(
@@ -169,7 +144,7 @@ class _RegisterAccountState extends State<RegisterAccount> {
               ),
               controller: _passwordConfirmController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 170.0,
             ),
             SizedBox(
@@ -177,7 +152,7 @@ class _RegisterAccountState extends State<RegisterAccount> {
               child: MaterialButton(
                 height: 50.0,
                 color: green25,
-                child: Text(
+                child: const Text(
                   'Cancelar',
                   style: TextStyle(
                     color: green100,
@@ -186,20 +161,18 @@ class _RegisterAccountState extends State<RegisterAccount> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                onPressed: () => _openPageHome(
-                  context: context,
-                  fullscreenDialog: true,),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
               ),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
+            sizedBox20,
             SizedBox(
               width: double.infinity,
               child: MaterialButton(
                   height: 50.0,
                   color: green50,
-                  child: Text('Siguiente'),
+                  child: const Text('Siguiente'),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -209,16 +182,6 @@ class _RegisterAccountState extends State<RegisterAccount> {
           ],
         ),
       ),
-    );
-  }
-
-  void _openPageHome({required BuildContext context, bool fullscreenDialog = false}) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          fullscreenDialog: fullscreenDialog,
-          builder: (context) => Home(),
-        )
     );
   }
 
@@ -273,11 +236,6 @@ class _RegisterAccountState extends State<RegisterAccount> {
 
   }
 
-  Future<String?> _signUpWithEmail(String email, String password) async {
-    String? user = await _signUpWithEmailUseCase.invoke(email, password);
-    return user;
-  }
-
   User _saveChange(String email, String password, String id) {
     newUser.id = id;
     newUser.email = email;
@@ -302,8 +260,4 @@ class _RegisterAccountState extends State<RegisterAccount> {
     Navigator.pushNamed(context, route, arguments: args);
   }
 
-  Future<User?> _userRegistered(String id) async {
-    User? user = await _getUserUseCase.invoke(id);
-    return user;
-  }
 }
